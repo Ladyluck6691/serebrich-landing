@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-my-landing | Портфолио</title>
+    <link rel="stylesheet" href="tokens.css">
+    <link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+  
+    <div class="page">
+
+        <!-- ============ z5 — ХЕДЕР ============ -->
+        <!-- Локап: монограмма S + слово. Единый блок, перенос запрещён.
+             Приставок нет: читается строго Serebrich. -->
+        <header class="hdr">
+          <div class="hdr__inner">
+            <a class="lockup" href="/">
+              <span class="lockup__mark" aria-hidden="true">S</span>
+              <span class="lockup__word">Serebrich</span>
+            </a>
+      
+            <nav class="hdr__nav" aria-label="Основная навигация">
+              <a href="#cases">Кейсы</a>
+              <a href="#services">Услуги</a>
+              <a href="#about">О проекте</a>
+            </nav>
+      
+            <a class="btn btn--ghost hdr__cta" href="#contact">Связаться</a>
+          </div>
+        </header>
+      
+        <!-- ============ z0 — HERO ============ -->
+        <section class="hero">
+          <div class="hero__inner">
+      
+            <!-- ---------- z4 — текстовая колонка ---------- -->
+            <div class="hero__text">
+              <h1 class="hero__h1">
+                Разрабатываю сайты, приложения и&nbsp;ИИ-агентов
+                <span class="hero__niche">для [Ваша Ниша]</span>
+              </h1>
+      
+              <p class="hero__sub">
+                Беру задачу целиком: прототип, дизайн, разработка, запуск и поддержка.
+                Отвечаю за результат лично.
+              </p>
+      
+              <div class="hero__cta">
+                <a class="btn btn--primary" href="#contact">Обсудить проект</a>
+                <a class="btn btn--ghost" href="#cases">Смотреть кейсы</a>
+              </div>
+      
+              <!-- Триггер надёжности. Формулировка фиксирована, имени здесь нет. -->
+              <p class="hero__trust">Интеграция ИИ и веб-разработка с 2021 года</p>
+            </div>
+      
+            <!-- ---------- z1–z3 — медальон ---------- -->
+            <div class="hero__stage">
+              <div class="medallion" data-rotation>
+                <!-- z1 — гало. Статично, размытие запечено в градиент, без CSS-фильтра. -->
+                <span class="medallion__halo" aria-hidden="true"></span>
+      
+                <!-- z2 — обод. Статичная геометрия. -->
+                <svg class="medallion__rim" viewBox="0 0 440 440" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="chromeRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0"   stop-color="#f4f7fb"/>
+                      <stop offset=".35" stop-color="#93a5bd"/>
+                      <stop offset=".55" stop-color="#5a6a80"/>
+                      <stop offset=".78" stop-color="#c8d5e6"/>
+                      <stop offset="1"   stop-color="#6d7f97"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="220" cy="220" r="205" fill="none" stroke="url(#chromeRim)" stroke-width="16" opacity=".28"/>
+                  <circle cx="220" cy="220" r="213" fill="none" stroke="url(#chromeRim)" stroke-width="1.5" opacity=".85"/>
+                  <circle cx="220" cy="220" r="197" fill="none" stroke="url(#chromeRim)" stroke-width="1.5" opacity=".55"/>
+                </svg>
+      
+                <!-- z2a — кольцо-инженерия. Вращение 28s по часовой. -->
+                <svg class="medallion__ring medallion__ring--eng" viewBox="0 0 440 440" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="engTrace" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0"   stop-color="#eef4fb"/>
+                      <stop offset=".45" stop-color="#9fb2ca"/>
+                      <stop offset=".72" stop-color="#e6eef8"/>
+                      <stop offset="1"   stop-color="#7f92ab"/>
+                    </linearGradient>
+                  </defs>
+      
+                  <!-- дорожки платы: dasharray задан в градусах через pathLength -->
+                  <g fill="none" stroke="url(#engTrace)" stroke-linecap="butt">
+                    <circle cx="220" cy="220" r="200" pathLength="360" stroke-width="3"   stroke-dasharray="4 8" opacity=".9"/>
+                    <circle cx="220" cy="220" r="186" pathLength="360" stroke-width="1.5" stroke-dasharray="1 5" opacity=".5"/>
+                  </g>
+      
+                  <!-- радиальные перемычки -->
+                  <g stroke="#4cc2ff" stroke-width="2" stroke-linecap="round" opacity=".65">
+                    <line x1="220" y1="34"  x2="220" y2="52"/>
+                    <line x1="220" y1="406" x2="220" y2="388"/>
+                    <line x1="34"  y1="220" x2="52"  y2="220"/>
+                    <line x1="406" y1="220" x2="388" y2="220"/>
+                  </g>
+      
+                  <!-- контактные площадки -->
+                  <g fill="#8a6cff" opacity=".85">
+                    <circle cx="361" cy="79"  r="3"/>
+                    <circle cx="79"  cy="79"  r="3"/>
+                    <circle cx="79"  cy="361" r="3"/>
+                    <circle cx="361" cy="361" r="3"/>
+                  </g>
+                </svg>
+      
+                <!-- z2b — кольцо-ИИ. Вращение 20s против часовой. -->
+                <svg class="medallion__ring medallion__ring--ai" viewBox="0 0 440 440" aria-hidden="true" focusable="false">
+                  <g fill="none" stroke="#4cc2ff" stroke-linecap="round">
+                    <circle cx="220" cy="220" r="150" pathLength="360" stroke-width="2"   stroke-dasharray="30 20" opacity=".5"/>
+                    <circle cx="220" cy="220" r="132" pathLength="360" stroke-width="1.5" stroke-dasharray="5 13"  opacity=".35"/>
+                  </g>
+      
+                  <!-- нейроузлы -->
+                  <g fill="#4cc2ff">
+                    <circle cx="370" cy="220" r="3.2"/>
+                    <circle cx="295" cy="350" r="2.6"/>
+                    <circle cx="145" cy="350" r="2.6"/>
+                    <circle cx="70"  cy="220" r="3.2"/>
+                    <circle cx="145" cy="90"  r="2.6"/>
+                    <circle cx="295" cy="90"  r="2.6"/>
+                  </g>
+      
+                  <!-- связи узлов с ядром -->
+                  <g stroke="#8a6cff" stroke-width="1.5" stroke-linecap="round" opacity=".55">
+                    <line x1="370" y1="220" x2="352" y2="220"/>
+                    <line x1="70"  y1="220" x2="88"  y2="220"/>
+                    <line x1="295" y1="350" x2="281" y2="326"/>
+                    <line x1="145" y1="350" x2="159" y2="326"/>
+                    <line x1="145" y1="90"  x2="159" y2="114"/>
+                    <line x1="295" y1="90"  x2="281" y2="114"/>
+                  </g>
+                </svg>
+      
+                <!-- z2c — монограмма S. Верхний слой медальона, НЕ вращается никогда. -->
+                <svg class="medallion__mark" viewBox="0 0 440 440" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="chromeMark" x1=".15" y1="0" x2=".85" y2="1">
+                      <stop offset="0"   stop-color="#ffffff"/>
+                      <stop offset=".38" stop-color="#c2d2e6"/>
+                      <stop offset=".6"  stop-color="#7d8ea6"/>
+                      <stop offset=".82" stop-color="#eaf1fa"/>
+                      <stop offset="1"   stop-color="#8fa2ba"/>
+                    </linearGradient>
+                  </defs>
+                  <text x="220" y="222" text-anchor="middle" dominant-baseline="central"
+                        font-family="'Helvetica Neue', Arial, sans-serif" font-size="196" font-weight="600"
+                        fill="url(#chromeMark)" stroke="#4cc2ff" stroke-width="1.25" stroke-opacity=".45"
+                        paint-order="stroke">S</text>
+                </svg>
+      
+                <!-- z3 — блик. Проход 2,2 s, период 12 s. -->
+                <span class="medallion__glare" aria-hidden="true"></span>
+              </div>
+            </div>
+      
+          </div>
+        </section>
+      </div>
+      
+      <script src="hero-rotation.js" defer></script>
+      </body>
+      </html>
+        </section>
+
+       <!-- TASK 6: Блок Услуги -->
+       <section id="services" class="services-section">
+        <div class="container">
+            <div class="badge">Что я делаю</div>
+            <h2 class="section-title">Мои услуги</h2>
+            
+            <div class="services-grid">
+                <!-- Услуга 1 -->
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Вёрстка лендингов</h3>
+                    <p>Создание адаптивных и быстрых одностраничных сайтов на чистом HTML и CSS по готовым макетам.</p>
+                </div>
+
+                <!-- Услуга 2 -->
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Интерактивные эффекты</h3>
+                    <p>Оживление интерфейса: добавление плавной анимации, ховер-эффектов и адаптивной сетки.</p>
+                </div>
+            </div>
+        </div>
+    </section>       
+            </div>
+        </section>
+        <!-- TASK 7: Блок Процесс работы -->
+        <section id="process" class="process-section">
+            <div class="container">
+                <div class="badge">Этапы</div>
+                <h2 class="section-title">Как строится работа</h2>
+                
+                <div class="process-steps">
+                    <!-- Шаг 1 -->
+                    <div class="step-item">
+                        <div class="step-number">01</div>
+                        <div class="step-info">
+                            <h3>Брифинг и ТЗ</h3>
+                            <p>Созваниваемся, обсуждаем ваши задачи и цели. Я составляю детальное техническое задание.</p>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 2 -->
+                    <div class="step-item">
+                        <div class="step-number">02</div>
+                        <div class="step-info">
+                            <h3>Разработка и верстка</h3>
+                            <p>Пишу чистый, профессиональный код на HTML и CSS. Настраиваю современные вау-эффекты.</p>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 3 -->
+                    <div class="step-item">
+                        <div class="step-number">03</div>
+                        <div class="step-info">
+                            <h3>Тесты и запуск</h3>
+                            <p>Проверяю сайт на всех телефонах и компьютерах. Помогаю выложить готовый лендинг в интернет.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       <!-- TASK 8: Блок Цены -->
+       <section id="prices" class="prices-section">
+        <div class="container">
+            <div class="badge">Стоимость</div>
+            <h2 class="section-title">Прозрачные тарифы</h2>
+            
+            <div class="prices-grid">
+                <!-- Тариф 1 -->
+                <div class="price-card">
+                    <h3>Лендинг «Старт»</h3>
+                    <div class="card-price">от 15 000 ₽</div>
+                    <p class="price-desc">Идеально для быстрого запуска услуг или тестирования ниши.</p>
+                    <ul class="price-features">
+                        <li>Адаптивный дизайн</li>
+                        <li>Чистый код (HTML/CSS)</li>
+                        <li>Срок: до 5 дней</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-secondary" style="margin-left: 0; width: 100%; text-align: center; justify-content: center;">Выбрать</a>
+                </div>
+
+                <!-- Тариф 2 -->
+                <div class="price-card featured">
+                    <div class="card-badge">Популярно</div>
+                    <h3>Бизнес-лендинг</h3>
+                    <div class="card-price">от 30 000 ₽</div>
+                    <p class="price-desc">Эксклюзивный сайт со всеми вау-эффектами под ключ.</p>
+                    <ul class="price-features">
+                        <li>Индивидуальный дизайн</li>
+                        <li>Интерактивные анимации</li>
+                        <li>Базовая SEO-оптимизация</li>
+                        <li>Срок: до 10 дней</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">Заказать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- TASK 9: Блок FAQ -->
+     <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="badge">Вопросы</div>
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            
+            <div class="faq-list">
+                <!-- Вопрос 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">Входит ли в стоимость наполнение текстом?</div>
+                    <div class="faq-answer">Да, мы детально прорабатываем структуру и пишем продающие тексты на основе вашего брифа.</div>
+                </div>
+
+                <!-- Вопрос 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">Будет ли сайт открываться на смартфонах?</div>
+                    <div class="faq-answer">Конечно. Все сайты верстаются адаптивными и идеально отображаются на любых экранах — от мобильных телефонов до больших мониторов.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- TASK 10: Блок Контакты -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="badge">Связь</div>
+                <h2 class="section-title">Обсудить проект</h2>
+                
+                <div class="contact-box">
+                    <p class="contact-text">Готовы создать крутой продукт? Напишите мне в удобный мессенджер или оставьте заявку, и я отвечу вам в течение часа.</p>
+                    <div class="contact-buttons">
+                        <a href="https://t.me" class="btn btn-primary" target="_blank">Telegram</a>
+                        <a href="mailto:your_email@example.com" class="btn btn-secondary" style="margin-left: 0;">Email</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+</main>
+
+    <footer>
+        <div class="container">
+            <p style="text-align: center; padding: var(--block-padding) 0; color: var(--fg-muted); font-family: var(--font-mono); font-size: 0.85rem;">
+                &copy; 2026 2-my-landing. Все права защищены.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

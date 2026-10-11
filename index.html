@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Серебрич — первый экран</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  min-height:100vh;background:#05070e;color:#eef2fb;
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
+  overflow-x:hidden;
+}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ============ ФОН: свет и сетка ============ */
+.page{position:relative;isolation:isolate;flex:1;display:flex;flex-direction:column;
+      padding:clamp(18px,2.2vw,34px) clamp(20px,3.4vw,64px) clamp(16px,2vw,28px)}
+.page::before{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(56% 46% at 74% 30%, rgba(122,92,255,.20), transparent 70%),
+    radial-gradient(46% 40% at 12% 4%,  rgba(77,163,255,.14), transparent 72%),
+    radial-gradient(80% 52% at 50% 110%, rgba(77,163,255,.10), transparent 72%),
+    #05070e;
+}
+.page::after{
+  content:"";position:absolute;inset:0;z-index:-1;opacity:.5;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.030) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.030) 1px,transparent 1px);
+  background-size:66px 66px;
+  -webkit-mask-image:radial-gradient(120% 80% at 50% 0%,#000 10%,transparent 74%);
+          mask-image:radial-gradient(120% 80% at 50% 0%,#000 10%,transparent 74%);
+}
+
+/* ============ ШАПКА (из нашего варианта) ============ */
+.hd{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding-bottom:clamp(12px,1.5vw,20px);border-bottom:1px solid rgba(255,255,255,.09);
+  position:relative;z-index:3;
+}
+.brandchip{display:flex;align-items:center;gap:clamp(11px,1vw,17px);min-width:0}
+.brand{
+  font-size:clamp(14px,1.15vw,16px);font-weight:800;letter-spacing:.04em;color:#eef2fb;
+  text-decoration:none;white-space:nowrap;text-shadow:0 0 22px rgba(77,163,255,.35);
+}
+.nav{display:flex;align-items:center;gap:clamp(11px,1.7vw,26px)}
+.nav a{color:#8b95ad;font-size:clamp(12px,1vw,14px);font-weight:600;text-decoration:none;transition:color .2s;white-space:nowrap}
+.nav a:hover{color:#fff}
+.nav .cta{
+  padding:clamp(8px,.85vw,11px) clamp(14px,1.4vw,22px);border-radius:12px;color:#060b18;font-weight:800;
+  background:linear-gradient(135deg,#f4f8ff,#a9c8ff 45%,#a98cf5);
+  box-shadow:0 14px 40px -16px rgba(140,175,255,.95);
+}
+
+/* ============ ЗНАК: логотип неподвижен, кольца вращаются ============ */
+.med{
+  position:relative;display:grid;place-items:center;width:var(--core);height:var(--core);flex:none;
+  --o:calc(var(--core) * .075);--oo:calc(var(--core) * .185);
+}
+.med__halo{
+  position:absolute;inset:calc(var(--core) * -.42);border-radius:50%;
+  background:radial-gradient(circle,rgba(77,163,255,.22),rgba(122,92,255,.15) 46%,transparent 72%);
+  filter:blur(22px);animation:breathe 8s ease-in-out infinite;
+}
+.med__orbit{position:absolute;inset:calc(var(--o) * -1);border-radius:50%;animation:spin 20s linear infinite reverse}
+.med__orbit::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,#d8e8ff 0deg 1.4deg,transparent 1.4deg 11deg);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 1.6px),#000 calc(100% - 1.6px + 1px));
+          mask:radial-gradient(farthest-side,transparent calc(100% - 1.6px),#000 calc(100% - 1.6px + 1px));
+  opacity:.42;filter:drop-shadow(0 0 5px rgba(120,180,255,.9));
+}
+.med__node{position:absolute;inset:0;transform:rotate(var(--a,0deg))}
+.med__node::before{
+  content:"";position:absolute;top:0;left:50%;width:3.2px;height:3.2px;margin:-1.6px 0 0 -1.6px;border-radius:50%;
+  background:#eaf3ff;box-shadow:0 0 7px 2px rgba(110,170,255,.9);
+}
+.med__out{
+  position:absolute;inset:calc(var(--oo) * -1);border-radius:50%;--t:1.7px;animation:spin 28s linear infinite;
+  --grad:conic-gradient(from 20deg,transparent 0deg,#4da3ff 58deg,#8b6bff 152deg,rgba(139,107,255,.12) 232deg,#4da3ff 302deg,transparent 360deg);
+}
+.med__out::before{
+  content:"";position:absolute;inset:0;border-radius:50%;background:var(--grad);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - var(--t)),#000 calc(100% - var(--t) + 1px));
+          mask:radial-gradient(farthest-side,transparent calc(100% - var(--t)),#000 calc(100% - var(--t) + 1px));
+}
+.med__glow{position:absolute;inset:0;filter:blur(8px);opacity:.95}
+.med__glow::before{
+  content:"";position:absolute;inset:0;border-radius:50%;background:var(--grad);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - var(--t)),#000 calc(100% - var(--t) + 1px));
+          mask:radial-gradient(farthest-side,transparent calc(100% - var(--t)),#000 calc(100% - var(--t) + 1px));
+}
+.med__spark{
+  position:absolute;top:0;left:50%;width:4px;height:4px;margin:-2px 0 0 -2px;border-radius:50%;background:#fff;
+  box-shadow:0 0 8px 3px rgba(200,225,255,.95),0 0 20px 8px #4da3ff;
+}
+.med__core{
+  position:relative;width:100%;height:100%;border-radius:50%;
+  filter:drop-shadow(0 0 18px rgba(77,163,255,.42)) drop-shadow(0 0 46px rgba(122,92,255,.28));
+}
+.logoart{width:100%;height:100%;display:block}
+.med--sm{--core:clamp(42px,3.4vw,50px)}
+.med--sm .med__halo{inset:-30px;filter:blur(13px)}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+
+/* ============================================================
+   ТЕКСТ — размеры и расположение как на образце 1
+   ============================================================ */
+.hero{
+  flex:1;display:flex;align-items:center;
+  padding:clamp(22px,3vw,46px) 0 clamp(22px,3vw,46px);
+  position:relative;z-index:2;
+}
+.stack{
+  width:100%;
+  max-width:min(60%,840px);          /* блок стоит по центру, текст — по левому краю */
+  margin:0 auto;
+}
+
+/* плашка «Портфолио» */
+.badge{
+  display:inline-flex;align-items:center;
+  padding:clamp(7px,.75vw,10px) clamp(13px,1.25vw,18px);
+  border:1px solid rgba(255,255,255,.13);border-radius:999px;
+  background:rgba(255,255,255,.035);
+  color:#93a0b8;font-size:clamp(11px,.95vw,13.5px);font-weight:700;letter-spacing:.01em;
+}
+
+/* заголовок: 3 строки, очень крупный */
+.h1{
+  margin:clamp(14px,1.5vw,22px) 0 0;
+  font-size:clamp(30px,4.7vw,68px);
+  font-weight:800;line-height:1.08;letter-spacing:-.032em;
+}
+.h1 .acc{color:#4da3ff;text-shadow:0 0 44px rgba(77,163,255,.5)}
+
+/* пояснение: 2 строки */
+.lede{
+  margin:clamp(17px,1.9vw,28px) 0 0;
+  max-width:660px;
+  color:#8b95ad;font-weight:500;
+  font-size:clamp(14px,1.45vw,20px);line-height:1.5;
+}
+
+/* кнопки */
+.acts{display:flex;flex-wrap:wrap;gap:clamp(10px,1vw,15px);margin-top:clamp(24px,2.5vw,38px)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  padding:clamp(12px,1.13vw,17px) clamp(18px,1.9vw,32px);border-radius:13px;
+  font-size:clamp(12.5px,1.13vw,15.5px);font-weight:800;
+  transition:transform .22s,box-shadow .22s,border-color .22s;
+}
+.btn--grad{color:#060b18;background:linear-gradient(135deg,#f6f9ff,#a9c8ff 45%,#a98cf5);
+           box-shadow:0 18px 50px -18px rgba(140,175,255,.95)}
+.btn--grad:hover{transform:translateY(-2px)}
+.btn--out{color:#eef2fb;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.02)}
+.btn--out:hover{transform:translateY(-2px);border-color:rgba(77,163,255,.55)}
+
+/* ============ НИЖНЯЯ СТРОКА ============ */
+.foot{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  color:#4e5769;font-size:clamp(10.5px,.85vw,12px);letter-spacing:.06em;
+  position:relative;z-index:2;
+}
+
+@media (max-width:1000px){
+  .stack{max-width:100%}
+}
+@media (max-width:760px){
+  .nav a:not(.cta){display:none}
+  .med__orbit{display:none}
+  .h1{font-size:clamp(28px,8.4vw,44px)}
+  .lede{font-size:clamp(14px,3.6vw,17px)}
+  .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important}}
+</style>
+</head>
+<body>
+
+<!-- ===== знак: векторная копия, в вёрстке встанет сам файл ===== -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".22" stop-color="#cfdbf2"/>
+      <stop offset=".5" stop-color="#7f8dab"/><stop offset=".78" stop-color="#eef4ff"/>
+      <stop offset="1" stop-color="#9aa8c6"/>
+    </linearGradient>
+    <linearGradient id="metal" x1=".08" y1="0" x2=".42" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#e2ebfc"/>
+      <stop offset=".56" stop-color="#8e9dbb"/><stop offset=".8" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#b7c4dd"/>
+    </linearGradient>
+    <radialGradient id="disc" cx="50%" cy="42%" r="66%">
+      <stop offset="0" stop-color="#111c31"/><stop offset=".7" stop-color="#060a14"/><stop offset="1" stop-color="#03050b"/>
+    </radialGradient>
+    <linearGradient id="cres" x1=".55" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b6bff"/><stop offset="1" stop-color="#3f7bff"/>
+    </linearGradient>
+    <radialGradient id="mCres" cx=".86" cy=".53" r=".44">
+      <stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <radialGradient id="cresGlow" cx="88%" cy="52%" r="46%">
+      <stop offset="0" stop-color="#6f5cff" stop-opacity=".5"/>
+      <stop offset=".6" stop-color="#3f7bff" stop-opacity=".16"/><stop offset="1" stop-color="#3f7bff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fS" x="-55%" y="-55%" width="210%" height="210%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#759dfd" flood-opacity=".8"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="20" flood-color="#7a5cff" flood-opacity=".45"/>
+    </filter>
+    <filter id="fNode" x="-170%" y="-170%" width="440%" height="440%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#8fc0ff" flood-opacity=".95"/>
+    </filter>
+    <filter id="fLine" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#7fb3ff" flood-opacity=".75"/>
+    </filter>
+    <symbol id="logo" viewBox="0 0 420 420">
+      <circle cx="210" cy="210" r="203" fill="none" stroke="url(#chrome)" stroke-width="8"/>
+      <circle cx="210" cy="210" r="196" fill="none" stroke="#070b16" stroke-width="4" opacity=".9"/>
+      <circle cx="210" cy="210" r="194" fill="url(#disc)"/>
+      <circle cx="210" cy="210" r="194" fill="url(#cresGlow)"/>
+      <circle cx="210" cy="210" r="170" fill="none" stroke="#9fc0ff" stroke-width="1.4" stroke-dasharray="1.6 11" opacity=".3"/>
+      <g mask="url(#mcres)">
+        <circle cx="210" cy="210" r="160" fill="none" stroke="url(#cres)" stroke-width="34"
+                stroke-linecap="round" stroke-dasharray="2.6 6.4"/>
+      </g>
+      <g fill="none" stroke="#8fb8ff" stroke-width="1.7" opacity=".3" filter="url(#fLine)">
+        <path d="M14 258 H92 L120 230 H178"/>
+        <path d="M14 300 H66 L100 266 H152"/>
+        <path d="M14 342 H114 L146 310 H196"/>
+        <path d="M14 216 H58 L86 188 H138"/>
+        <path d="M96 178 V132 H124"/>
+      </g>
+      <g fill="#d9e8ff" opacity=".8" filter="url(#fNode)">
+        <circle cx="14" cy="258" r="3.4"/><circle cx="14" cy="300" r="3.4"/><circle cx="14" cy="342" r="3.4"/>
+        <circle cx="14" cy="216" r="3"/><circle cx="178" cy="230" r="2.8"/><circle cx="152" cy="266" r="2.8"/>
+        <circle cx="96" cy="178" r="3"/><circle cx="124" cy="132" r="2.8"/><circle cx="86" cy="188" r="2.6"/>
+      </g>
+      <g fill="none" stroke="#a8c9ff" stroke-width="1.5" opacity=".42" filter="url(#fLine)">
+        <path d="M296 312 C330 276 338 246 330 206"/>
+        <path d="M330 206 C338 184 350 170 368 160"/>
+        <path d="M330 206 C317 188 312 172 310 152"/>
+        <path d="M324 242 C342 234 354 226 363 216"/>
+      </g>
+      <g fill="#d6e7ff" opacity=".85" filter="url(#fNode)">
+        <circle cx="368" cy="160" r="3.2"/><circle cx="310" cy="152" r="3"/><circle cx="363" cy="216" r="2.6"/>
+        <circle cx="296" cy="312" r="2.6"/><circle cx="330" cy="206" r="2.4"/>
+      </g>
+      <g filter="url(#fS)">
+        <text x="208" y="299" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800"
+              font-size="262" letter-spacing="-6" fill="url(#metal)" stroke="#ffffff" stroke-opacity=".16" stroke-width="1.4">S</text>
+      </g>
+      <g transform="translate(312,148) scale(.72)" filter="url(#fNode)">
+        <path d="M0,-30 L5.5,-6 L30,0 L5.5,6 L0,30 L-5.5,6 L-30,0 L-5.5,-6 Z" fill="#ffffff"/>
+      </g>
+      <g transform="translate(103,196) scale(.3)">
+        <path d="M0,-30 L5.5,-6 L30,0 L5.5,6 L0,30 L-5.5,6 L-30,0 L-5.5,-6 Z" fill="#dce9ff" opacity=".7"/>
+      </g>
+    </symbol>
+    <mask id="mcres"><rect x="0" y="0" width="420" height="420" fill="url(#mCres)"/></mask>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <!-- ============ ШАПКА ============ -->
+  <header class="hd">
+    <div class="brandchip">
+      <div class="med med--sm" role="img" aria-label="Знак бренда">
+        <span class="med__halo"></span>
+        <span class="med__out"><i class="med__glow"></i><i class="med__spark"></i></span>
+        <span class="med__orbit">
+          <i class="med__node" style="--a:24deg"></i>
+          <i class="med__node" style="--a:148deg"></i>
+          <i class="med__node" style="--a:272deg"></i>
+        </span>
+        <span class="med__core"><svg class="logoart" viewBox="0 0 420 420"><use href="#logo"/></svg></span>
+      </div>
+      <a class="brand" href="#">Серебрич</a>
+    </div>
+
+    <nav class="nav">
+      <a href="#">Кейсы</a>
+      <a href="#">Услуги</a>
+      <a href="#">Процесс</a>
+      <a href="#">Цены</a>
+      <a href="#">FAQ</a>
+      <a class="cta" href="#">Связаться</a>
+    </nav>
+  </header>
+
+  <!-- ============ ПЕРВЫЙ ЭКРАН ============ -->
+  <main class="hero">
+    <div class="stack">
+
+      <span class="badge">Портфолио</span>
+
+      <h1 class="h1">Разрабатываю сайты, приложения и ИИ-агентов для <span class="acc">[Ваша Ниша]</span></h1>
+
+      <p class="lede">Создаю дорогие и профессиональные цифровые решения с упором на высокую конверсию, чистый код и современные вау-эффекты.</p>
+
+      <div class="acts">
+        <a class="btn btn--grad" href="#">Обсудить проект</a>
+        <a class="btn btn--out" href="#">Смотреть кейсы</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026</span>
+    <span>Все права защищены</span>
+  </footer>
+
+</div>
+<section id="services" class="services-section">
+    <div class="container">
+        <div class="badge">Что я делаю</div>
+        <h2 class="section-title">Мои услуги</h2>
+        
+        <div class="services-grid">
+            <!-- Услуга 1 -->
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Вёрстка лендингов</h3>
+                <p>Создание адаптивных и быстрых одностраничных сайтов на чистом HTML и CSS по готовым макетам.</p>
+            </div>
+
+            <!-- Услуга 2 -->
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Интерактивные эффекты</h3>
+                <p>Оживление интерфейса: добавление плавной анимации, ховер-эффектов и адаптивной сетки.</p>
+            </div>
+        </div>       <!-- TASK 6: Блок Услуги -->
+
+    </div>
+</section>       
+        </div>
+    </section>
+    <!-- TASK 7: Блок Процесс работы -->
+    <section id="process" class="process-section">
+        <div class="container">
+            <div class="badge">Этапы</div>
+            <h2 class="section-title">Как строится работа</h2>
+            
+            <div class="process-steps">
+                <!-- Шаг 1 -->
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-info">
+                        <h3>Брифинг и ТЗ</h3>
+                        <p>Созваниваемся, обсуждаем ваши задачи и цели. Я составляю детальное техническое задание.</p>
+                    </div>
+                </div>
+
+                <!-- Шаг 2 -->
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-info">
+                        <h3>Разработка и верстка</h3>
+                        <p>Пишу чистый, профессиональный код на HTML и CSS. Настраиваю современные вау-эффекты.</p>
+                    </div>
+                </div>
+
+                <!-- Шаг 3 -->
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-info">
+                        <h3>Тесты и запуск</h3>
+                        <p>Проверяю сайт на всех телефонах и компьютерах. Помогаю выложить готовый лендинг в интернет.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   <!-- TASK 8: Блок Цены -->
+   <section id="prices" class="prices-section">
+    <div class="container">
+        <div class="badge">Стоимость</div>
+        <h2 class="section-title">Прозрачные тарифы</h2>
+        
+        <div class="prices-grid">
+            <!-- Тариф 1 -->
+            <div class="price-card">
+                <h3>Лендинг «Старт»</h3>
+                <div class="card-price">от 15 000 ₽</div>
+                <p class="price-desc">Идеально для быстрого запуска услуг или тестирования ниши.</p>
+                <ul class="price-features">
+                    <li>Адаптивный дизайн</li>
+                    <li>Чистый код (HTML/CSS)</li>
+                    <li>Срок: до 5 дней</li>
+                </ul>
+                <a href="#contact" class="btn btn-secondary" style="margin-left: 0; width: 100%; text-align: center; justify-content: center;">Выбрать</a>
+            </div>
+
+            <!-- Тариф 2 -->
+            <div class="price-card featured">
+                <div class="card-badge">Популярно</div>
+                <h3>Бизнес-лендинг</h3>
+                <div class="card-price">от 30 000 ₽</div>
+                <p class="price-desc">Эксклюзивный сайт со всеми вау-эффектами под ключ.</p>
+                <ul class="price-features">
+                    <li>Индивидуальный дизайн</li>
+                    <li>Интерактивные анимации</li>
+                    <li>Базовая SEO-оптимизация</li>
+                    <li>Срок: до 10 дней</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;">Заказать</a>
+            </div>
+        </div>
+    </div>
+</section>
+ <!-- TASK 9: Блок FAQ -->
+ <section id="faq" class="faq-section">
+    <div class="container">
+        <div class="badge">Вопросы</div>
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+        
+        <div class="faq-list">
+            <!-- Вопрос 1 -->
+            <div class="faq-item">
+                <div class="faq-question">Входит ли в стоимость наполнение текстом?</div>
+                <div class="faq-answer">Да, мы детально прорабатываем структуру и пишем продающие тексты на основе вашего брифа.</div>
+            </div>
+
+            <!-- Вопрос 2 -->
+            <div class="faq-item">
+                <div class="faq-question">Будет ли сайт открываться на смартфонах?</div>
+                <div class="faq-answer">Конечно. Все сайты верстаются адаптивными и идеально отображаются на любых экранах — от мобильных телефонов до больших мониторов.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- TASK 10: Блок Контакты -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="badge">Связь</div>
+            <h2 class="section-title">Обсудить проект</h2>
+            
+            <div class="contact-box">
+                <p class="contact-text">Готовы создать крутой продукт? Напишите мне в удобный мессенджер или оставьте заявку, и я отвечу вам в течение часа.</p>
+                <div class="contact-buttons">
+                    <a href="https://t.me" class="btn btn-primary" target="_blank">Telegram</a>
+                    <a href="mailto:your_email@example.com" class="btn btn-secondary" style="margin-left: 0;">Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p style="text-align: center; padding: var(--block-padding) 0; color: var(--fg-muted); font-family: var(--font-mono); font-size: 0.85rem;">
+            &copy; 2026 Наталья Серебрич. Все права защищены.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
+
+
+
